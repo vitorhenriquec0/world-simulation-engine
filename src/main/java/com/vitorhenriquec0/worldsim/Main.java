@@ -8,10 +8,10 @@ public class Main {
 
         World myWorld = new World();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 400; i++) {
             myWorld.advanceTime();
 
-            try { Thread.sleep(500); } catch (InterruptedException e) { e.printStackTrace(); }
+            try { Thread.sleep(10); } catch (InterruptedException e) { e.printStackTrace(); }
         }
     }
 }

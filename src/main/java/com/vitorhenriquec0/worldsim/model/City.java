@@ -16,7 +16,7 @@ public class City {
         this.population.add(citizen);
     }
 
-    public void updateDay() {
+    public void performAnnualUpdate() {
         for (Citizen citizen : population) {
             citizen.ageOneYear();
         }

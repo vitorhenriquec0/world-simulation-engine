@@ -1,43 +1,41 @@
 package com.vitorhenriquec0.worldsim.model;
 
+import com.vitorhenriquec0.worldsim.engine.SimulationTime;
+
 /*
     Represents the entire simulated world.
     This class acts as the root os the simulation, containing the city,
  population, and managing the time progression.
 */
 
+
+
 public class World {
     
-    private int day;
+    private SimulationTime time;
     private City city;
 
     public World() {
-        this.day = 0;
-
+        this.time = new SimulationTime();
         this.city = new City("Techopolis");
 
-        Citizen adam = new Citizen(1L, "Adam", 20);
-        Citizen eve = new Citizen(2L,"Eve", 18);
-
-        this.city.addCitizen(adam);
-        this.city.addCitizen(eve);
+        this.city.addCitizen(new Citizen(1L, "Adam", 20));
+        this.city.addCitizen(new Citizen(2L,"Eve", 18));
     }
 
     public void advanceTime() {
-        this.day++;
-        System.out.println(">>> Simulation Day: " + this.day);
+        boolean isNewYear = this.time.advance();
+        System.out.println(">>> Date: " + this.time.toString());
 
-        this.city.updateDay();
+        if (isNewYear) {
+            System.out.println("HAPPY NEW YEAR! Simulating aging effects.");
+            this.city.performAnnualUpdate();
+        }
 
         System.out.println(this.city.getPopulationInfo());
-
         for (Citizen c : this.city.getPopulation()) {
             System.out.println(" - " + c.toString());
         }
         System.out.println("------------------------------");
-    }
-
-    public int getDay() {
-        return day;
     }
 }

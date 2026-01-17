@@ -1,8 +1,8 @@
 package com.vitorhenriquec0.worldsim.model;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Iterator;
+import java.util.List;
 
 public class City {
     private String name;
@@ -32,9 +32,18 @@ public class City {
 
             citizen.ageOneYear(this.economy);
 
-            // logic: If your age is greater than 75, you have a chance of dying.
-            // If it's greater than 100, you die instantly.
+            // unemployed -> job seeker
+            if (citizen.getAge() == 18 && citizen.getProfession() == Profession.UNEMPLOYED) {
+                Profession newJob = pickRandomProfession();
+                citizen.setProfession(newJob);
 
+                if (newJob != Profession.UNEMPLOYED) {
+                    System.out.println(citizen.getName() + " is now working as " + newJob.getLabel());
+                }
+            }
+
+            // logic: If your age is greater than 75, you have a chance of dying.
+            // If it's greater than 100, you die instantly
             boolean died = false;
 
             if (citizen.getAge() > 100 || (citizen.getAge() > 75 && Math.random() < 0.20)) {
@@ -59,6 +68,16 @@ public class City {
         if (deadCount > 0) {
             System.out.println(">>> Died: " + deadCount);
         }
+    }
+
+    private Profession pickRandomProfession() {
+        double chance = Math.random();
+
+        if (chance < 0.10) return Profession.UNEMPLOYED;
+        if (chance < 0.50) return Profession.FARMER;
+        if (chance < 0.80) return Profession.BLACKSMITH;
+
+        return Profession.MERCHANT;
     }
 
     public Economy getEconomy() {

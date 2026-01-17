@@ -45,6 +45,10 @@ public class Citizen {
         this.profession = profession;
     }
 
+    public Profession getProfession() {
+        return profession;
+    }
+
     @Override
     public String toString() {
         return String.format("%s (%d years) - %s | Balance: U$ %.2f", name, age, profession.getLabel(), balance);

@@ -38,4 +38,8 @@ public class World {
         }
         System.out.println("------------------------------");
     }
+
+    public City getCity() {
+        return city;
+    }
 }

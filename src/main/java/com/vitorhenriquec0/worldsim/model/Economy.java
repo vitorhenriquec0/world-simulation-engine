@@ -18,8 +18,8 @@ public class Economy {
         return amount - tax; // salary - tax
     }
 
-    public double getTreasureBalance() {
-        return treasuryBalance;
+    public double getTreasuryBalance() {
+        return this.treasuryBalance;
     }
 
     public double getTaxRate() {
@@ -28,5 +28,19 @@ public class Economy {
 
     public void setTaxRate(double taxRate) {
         this.taxRate = taxRate;
+    }
+
+    public void deposit(double amount) {
+        this.treasuryBalance += amount;
+    }
+
+    // Returns true if payment was successful,
+    // false if there were insufficient funds.
+    public boolean withdraw(double amount) {
+        if (this.treasuryBalance >= amount) {
+            this.treasuryBalance -= amount;
+            return true;
+        }
+        return false;
     }
 }

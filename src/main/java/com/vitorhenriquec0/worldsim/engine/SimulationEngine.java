@@ -16,10 +16,14 @@ public class SimulationEngine {
 
         this.monthlyRules.add(new TaxRule());
 
+        this.annualRules.add(new ConstructionRule());
         this.annualRules.add(new AgingRule());
+        this.annualRules.add(new JobRule());
         this.annualRules.add(new DeathRule());
         this.annualRules.add(new ReproductionRule());
         this.annualRules.add(new RandomEventRule());
+
+        this.annualRules.add(new StatisticsRule());
     }
 
     public void processMonthly(World world) {

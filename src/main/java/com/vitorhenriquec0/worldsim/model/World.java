@@ -36,8 +36,8 @@ public class World {
 
             this.engine.processAnnual(this);
 
-            System.out.println("CITY TREASURY: $" + this.city.getEconomy().getTreasureBalance());
-            System.out.println(this.city.getPopulationInfo());
+            // System.out.println("CITY TREASURY: $" + this.city.getEconomy().getTreasureBalance());
+            // System.out.println(this.city.getPopulationInfo());
             System.out.println();
         }
     }
@@ -46,4 +46,7 @@ public class World {
         return city;
     }
 
+    public SimulationTime getTime() {
+        return this.time;
+    }
 }

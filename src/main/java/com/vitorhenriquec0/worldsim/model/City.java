@@ -19,6 +19,12 @@ public class City {
         this.population.add(citizen);
     }
 
+    public void performMonthlyUpdate() {
+        for (Citizen citizen : population) {
+            citizen.receiveSalary(this.economy);
+        }
+    }
+
     public void performAnnualUpdate() {
     
         // temporary list of births for the year.
@@ -30,7 +36,7 @@ public class City {
         while (iterator.hasNext()) {
             Citizen citizen = iterator.next();
 
-            citizen.ageOneYear(this.economy);
+            citizen.age();
 
             // unemployed -> job seeker
             if (citizen.getAge() == 18 && citizen.getProfession() == Profession.UNEMPLOYED) {
@@ -52,7 +58,7 @@ public class City {
                 died = true; // mark the death to avoid having children later.
             }
 
-            if (!died && citizen.getAge() >= 18 && Math.random() < 0.10) {
+            if (!died && citizen.getAge() >= 18 && Math.random() < 0.25) {
                 long newId = population.size() + newCitizens.size() + deadCount + 1L; // unique ID
                 Citizen baby = new Citizen(newId, "Citizen" + newId, 0);
                 newCitizens.add(baby);

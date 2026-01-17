@@ -1,6 +1,9 @@
 package com.vitorhenriquec0.worldsim.model;
 
 import com.vitorhenriquec0.worldsim.engine.SimulationTime;
+import com.vitorhenriquec0.worldsim.events.EconomicBoom;
+import com.vitorhenriquec0.worldsim.events.Plague;
+import com.vitorhenriquec0.worldsim.events.WorldEvent;
 
 /*
     Represents the entire simulated world.
@@ -25,23 +28,40 @@ public class World {
 
     public void advanceTime() {
         boolean isNewYear = this.time.advance();
-        System.out.println(">>> Date: " + this.time.toString());
+
+        this.city.performMonthlyUpdate();
 
         if (isNewYear) {
             System.out.println("HAPPY NEW YEAR! Simulating aging effects.");
+
             this.city.performAnnualUpdate();
+            tryTriggerRandomEvent();
 
             System.out.println("CITY TREASURY: $" + this.city.getEconomy().getTreasureBalance());
-        }
 
-        System.out.println(this.city.getPopulationInfo());
-        for (Citizen c : this.city.getPopulation()) {
-            System.out.println(" - " + c.toString());
+            System.out.println(this.city.getPopulationInfo());
+            System.out.println();
         }
-        System.out.println("------------------------------");
     }
 
     public City getCity() {
         return city;
+    }
+
+    private void tryTriggerRandomEvent() {
+        if (Math.random() < 0.20) {
+
+            WorldEvent event;
+
+            if (Math.random() < 0.50) {
+                event = new Plague();
+            } else {
+                event = new EconomicBoom();
+            }
+            
+
+            System.out.println(">>> EVENT: " + event.getName() + " triggered!");
+            event.apply(this);
+        }
     }
 }

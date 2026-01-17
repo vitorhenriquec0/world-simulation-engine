@@ -15,17 +15,16 @@ public class Citizen {
         this.balance = 0.0; // default
     }
 
-    public void ageOneYear(Economy economy) {
+    public void age() {
         this.age++;
+    }
 
+    public void receiveSalary(Economy economy) {
         if (this.profession != Profession.UNEMPLOYED) {
             double grossSalary = this.profession.getBaseSalary();
 
             double netIncome = economy.collectTax(grossSalary);
-
             this.balance += netIncome;
-
-            System.out.println(this.name + " earned salary: $" + grossSalary + " (Tax paid: $" + (grossSalary - netIncome) + ")");
         }
     }
 
@@ -47,6 +46,10 @@ public class Citizen {
 
     public Profession getProfession() {
         return profession;
+    }
+
+    public void receiveDirectDeposit(double amount) {
+        this.balance += amount;
     }
 
     @Override

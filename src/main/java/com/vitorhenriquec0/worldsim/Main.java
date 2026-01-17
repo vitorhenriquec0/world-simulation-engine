@@ -14,7 +14,7 @@ public class Main {
         myWorld.getCity().getPopulation().get(0).setProfession(Profession.FARMER); // Adam
         myWorld.getCity().getPopulation().get(1).setProfession(Profession.MERCHANT); // Eve
 
-        for (int i = 0; i < 8000; i++) {
+        for (int i = 0; i < 300; i++) {
             myWorld.advanceTime();
 
             try { Thread.sleep(10); } catch (InterruptedException e) { e.printStackTrace(); }

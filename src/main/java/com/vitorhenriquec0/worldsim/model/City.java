@@ -8,6 +8,7 @@ public class City {
     private String name;
     private List<Citizen> population;
     private Economy economy;
+    private long citizenIdCounter = 0;
 
     public City(String name) {
         this.name = name;
@@ -59,7 +60,7 @@ public class City {
             }
 
             if (!died && citizen.getAge() >= 18 && Math.random() < 0.25) {
-                long newId = population.size() + newCitizens.size() + deadCount + 1L; // unique ID
+                long newId = ++citizenIdCounter;
                 Citizen baby = new Citizen(newId, "Citizen" + newId, 0);
                 newCitizens.add(baby);
             }

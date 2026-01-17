@@ -30,6 +30,8 @@ public class World {
         if (isNewYear) {
             System.out.println("HAPPY NEW YEAR! Simulating aging effects.");
             this.city.performAnnualUpdate();
+
+            System.out.println("CITY TREASURY: $" + this.city.getEconomy().getTreasureBalance());
         }
 
         System.out.println(this.city.getPopulationInfo());

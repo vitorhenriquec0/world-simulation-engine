@@ -6,10 +6,12 @@ import java.util.List;
 public class City {
     private String name;
     private List<Citizen> population;
+    private Economy economy;
 
-    public  City(String name) {
+    public City(String name) {
         this.name = name;
         this.population = new ArrayList<>();
+        this.economy = new Economy();
     }
 
     public void addCitizen(Citizen citizen) {
@@ -18,8 +20,12 @@ public class City {
 
     public void performAnnualUpdate() {
         for (Citizen citizen : population) {
-            citizen.ageOneYear();
+            citizen.ageOneYear(this.economy);
         }
+    }
+
+    public Economy getEconomy() {
+        return economy;
     }
 
     public String getPopulationInfo() {

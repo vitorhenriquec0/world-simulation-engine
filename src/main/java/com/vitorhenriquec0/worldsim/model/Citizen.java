@@ -6,6 +6,7 @@ public class Citizen {
     private int age;
     private Profession profession;
     private double balance; // money in account
+    private int happiness; // 0 - 100
 
     public Citizen(Long id, String name, int age) {
         this.id = id;
@@ -13,6 +14,7 @@ public class Citizen {
         this.age = age;
         this.profession = Profession.UNEMPLOYED; // default
         this.balance = 0.0; // default
+        this.happiness = 50; // default
     }
 
     public void age() {
@@ -26,6 +28,17 @@ public class Citizen {
             double netIncome = economy.collectTax(grossSalary);
             this.balance += netIncome;
         }
+    }
+
+    public void changeHappiness(int delta) {
+        this.happiness += delta;
+
+        if (this.happiness > 100) this.happiness = 100;
+        if (this.happiness < 0) this.happiness = 0;
+    }
+
+    public int getHappiness() {
+        return happiness;
     }
 
     public Long getId() {

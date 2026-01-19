@@ -11,7 +11,8 @@ public enum BuildingType {
     UNIVERSITY("State University", 80000.0, "Reduces unemployment by 5%"),
 
     //others
-    MARKETPLACE("Grand Bazaar", 20000.0, "Boosts tax revenue by small amount");
+    MARKETPLACE("Grand Bazaar", 20000.0, "Boosts tax revenue by small amount"),
+    PARK("Central Park", 150000.0, "Increases happiness by 2 points per month");
 
     private final String name;
     private final double cost;

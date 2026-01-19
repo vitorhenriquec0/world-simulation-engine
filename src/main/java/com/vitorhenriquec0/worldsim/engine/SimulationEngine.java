@@ -15,6 +15,7 @@ public class SimulationEngine {
         this.annualRules = new ArrayList<>();
 
         this.monthlyRules.add(new TaxRule());
+        this.monthlyRules.add(new HappinessRule());
 
         this.annualRules.add(new ConstructionRule());
         this.annualRules.add(new AgingRule());
@@ -22,6 +23,7 @@ public class SimulationEngine {
         this.annualRules.add(new DeathRule());
         this.annualRules.add(new ReproductionRule());
         this.annualRules.add(new RandomEventRule());
+        this.annualRules.add(new RebellionRule());
 
         this.annualRules.add(new StatisticsRule());
     }

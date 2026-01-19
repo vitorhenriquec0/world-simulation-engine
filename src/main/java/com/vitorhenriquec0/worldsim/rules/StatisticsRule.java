@@ -21,6 +21,15 @@ public class StatisticsRule implements SimulationRule {
 
         System.out.println(" Population: " + population.size());
         System.out.println(" Treasury:   $" + String.format("%,.2f", city.getEconomy().getTreasuryBalance()));
+
+        double totalHappy = 0;
+        if (!population.isEmpty()) {
+            for (Citizen c : population) {
+                totalHappy += c.getHappiness();
+            }
+            double avgHappy = totalHappy / population.size();
+            System.out.println(" Happiness: " + String.format("%.1f", avgHappy));
+        }
         
         List<BuildingType> buildings = city.getBuildings();
         

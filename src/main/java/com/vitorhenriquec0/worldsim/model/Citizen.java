@@ -1,5 +1,8 @@
 package com.vitorhenriquec0.worldsim.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Citizen {
     private Long id;
     private String name;
@@ -7,6 +10,19 @@ public class Citizen {
     private Profession profession;
     private double balance; // money in account
     private int happiness; // 0 - 100
+    private long motherId = -1;
+    private long fatherId = -1;
+
+    private List<Long> childrenIds = new ArrayList<>();
+
+    public void setParents(long motherId, long fatherId) {
+        this.motherId = motherId;
+        this.fatherId = fatherId;
+    }
+
+    public void addChild(long childId) {
+        this.childrenIds.add(childId);
+    }
 
     public Citizen(Long id, String name, int age) {
         this.id = id;

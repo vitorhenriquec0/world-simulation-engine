@@ -1,5 +1,6 @@
 package com.vitorhenriquec0.worldsim.rules;
 
+import com.vitorhenriquec0.worldsim.config.SimulationConfig;
 import com.vitorhenriquec0.worldsim.model.Citizen;
 import com.vitorhenriquec0.worldsim.model.Profession;
 import com.vitorhenriquec0.worldsim.model.World;
@@ -20,17 +21,17 @@ public class HappinessRule implements SimulationRule {
             }
             else {
                 if (citizen.getProfession() == Profession.UNEMPLOYED) {
-                    citizen.changeHappiness(-5);
+                    citizen.changeHappiness(SimulationConfig.HAPPINESS_UNEMPLOYED_PENALTY);
                 } else {
-                    citizen.changeHappiness(2);
+                    citizen.changeHappiness(SimulationConfig.HAPPINESS_JOB_BONUS);
                 }
             }
             
             // tax, for everyone
-            citizen.changeHappiness(-1);
+            citizen.changeHappiness(SimulationConfig.HAPPINESS_TAX_PENALTY);
 
             if (hasPark) {
-                citizen.changeHappiness(2);
+                citizen.changeHappiness(SimulationConfig.HAPPINESS_PARK_BONUS);
             }
         }
     }

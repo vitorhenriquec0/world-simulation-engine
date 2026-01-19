@@ -1,5 +1,6 @@
 package com.vitorhenriquec0.worldsim.rules;
 
+import com.vitorhenriquec0.worldsim.config.SimulationConfig;
 import com.vitorhenriquec0.worldsim.model.Citizen;
 import com.vitorhenriquec0.worldsim.model.City;
 import com.vitorhenriquec0.worldsim.model.Profession;
@@ -15,7 +16,7 @@ public class JobRule implements SimulationRule {
 
         for (Citizen citizen : population) {
 
-            if (citizen.getAge() >= 18 && citizen.getProfession() == Profession.UNEMPLOYED) {
+            if (citizen.getAge() >= SimulationConfig.getMinWorkingAge() && citizen.getProfession() == Profession.UNEMPLOYED) {
                 Profession newJob = pickRandomProfession(city);
                 citizen.setProfession(newJob);
 

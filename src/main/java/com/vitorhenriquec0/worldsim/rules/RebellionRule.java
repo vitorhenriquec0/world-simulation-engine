@@ -1,5 +1,6 @@
 package com.vitorhenriquec0.worldsim.rules;
 
+import com.vitorhenriquec0.worldsim.config.SimulationConfig;
 import com.vitorhenriquec0.worldsim.model.Citizen;
 import com.vitorhenriquec0.worldsim.model.World;
 
@@ -14,7 +15,7 @@ public class RebellionRule implements SimulationRule {
         for (Citizen c : population) totalHappy += c.getHappiness();
         double average = totalHappy / population.size();
 
-        if (average < 20.0) {
+        if (average < SimulationConfig.getHappinessRiotThreshold()) {
             System.out.println(">>> RIOT! The population is furious.");
             System.out.println(">>> Happiness: " + String.format("%.1f", average) + ")");
 

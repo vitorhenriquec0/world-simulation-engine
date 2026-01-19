@@ -1,9 +1,10 @@
 package com.vitorhenriquec0.worldsim.rules;
 
+import com.vitorhenriquec0.worldsim.config.SimulationConfig;
 import com.vitorhenriquec0.worldsim.model.Citizen;
 import com.vitorhenriquec0.worldsim.model.World;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ReproductionRule implements SimulationRule {
     
@@ -12,21 +13,38 @@ public class ReproductionRule implements SimulationRule {
         var city = world.getCity();
         var population = city.getPopulation();
 
-        List<Citizen> babies = new ArrayList<>();
+        // filter candidates (18 - 60 years)
+        List<Citizen> candidates = population.stream()
+            .filter(c -> c.getAge() >= SimulationConfig.getMinWorkingAge() && c.getAge() <= 60)
+            .collect(Collectors.toList());
 
-        for (Citizen citizen : population) {
-            if (citizen.getAge() >= 18 && Math.random() < 0.25) {
+        if (candidates.size() < 2) return;  // there is no possible couple
 
-                long newId = city.generateNextId();
+        // try to create a random couple
+        int attempts = SimulationConfig.getMaxAttemptsPerYear();
+        while (attempts > 0) {
+            Citizen p1 = candidates.get((int) (Math.random() * candidates.size()));
+            Citizen p2 = candidates.get((int) (Math.random() * candidates.size()));
 
-                Citizen baby = new Citizen(newId, "Citizen" + newId, 0);
-                babies.add(baby);
+            if (p1.getId() != p2.getId()) {
+
+                long babyId = world.generateId();
+
+                Citizen baby = new Citizen(babyId, "Citizen" + babyId, 0);
+
+                baby.setParents(p1.getId(), p2.getId());
+
+                p1.addChild(baby.getId());
+                p2.addChild(baby.getId());
+
+                population.add(baby);
+                System.out.println("   BABY BORN: " + baby.getName() + 
+                                   " (Parents: " + p1.getName() + " & " + p2.getName() + ")");
+
+                break;
             }
+            attempts--;
         }
 
-        if (!babies.isEmpty()) {
-            city.addNewCitizens(babies);
-            System.out.println(">>> Babies BORN this year: " + babies.size());
-        }
     }
 }

@@ -17,6 +17,8 @@ public class World {
     private City city;
     private SimulationEngine engine;
 
+    private long idCounter = 1000;
+
     public World() {
         this.time = new SimulationTime();
         this.city = new City("Techopolis");
@@ -48,5 +50,9 @@ public class World {
 
     public SimulationTime getTime() {
         return this.time;
+    }
+
+    public long generateId() {
+        return ++idCounter;
     }
 }

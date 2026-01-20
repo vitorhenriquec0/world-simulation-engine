@@ -1,4 +1,4 @@
-# 🌍 World Simulation Engine
+# > World Simulation Engine
 
 ## Sobre o projeto
 

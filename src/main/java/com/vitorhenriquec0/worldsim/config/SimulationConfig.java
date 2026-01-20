@@ -66,4 +66,15 @@ public class SimulationConfig {
         minWorkingAge = age;
     }
 
+    // inheritance
+
+    private static final double DEFAULT_INHERITANCE_TAX_RATE = 0.10; // 10%
+    
+    private static double inheritanceTaxRate = DEFAULT_INHERITANCE_TAX_RATE;
+
+    public static double getInheritanceTaxRate() { return inheritanceTaxRate; }
+    
+    public static void setInheritanceTaxRate(double rate) {
+        inheritanceTaxRate = rate;
+    }
 }

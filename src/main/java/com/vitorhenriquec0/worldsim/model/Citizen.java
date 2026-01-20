@@ -81,6 +81,14 @@ public class Citizen {
         this.balance += amount;
     }
 
+    public List<Long> getChildrenIds() {
+        return childrenIds;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
     @Override
     public String toString() {
         return String.format("%s (%d years) - %s | Balance: U$ %.2f", name, age, profession.getLabel(), balance);
